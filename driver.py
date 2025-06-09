@@ -31,13 +31,46 @@ def compare_omp_mpi_strong_scaling_rayleigh() -> None:
     plt.xticks(mpi_df['N Processes'])
     plt.tight_layout()
     plt.show()
+    
+def increasing_resolution_rayleigh_benard_2d() -> None:
+    # Load the CSV file
+    df = pd.read_csv("csv/RayleighBenard2d_Resolution_Increase_(12_threads_2_processes).csv")
+
+    # Create the plot
+    plt.figure(figsize=(12, 6))
+
+    # Subplot 1: Real Time and CPU Time
+    plt.subplot(1, 2, 1)
+    plt.plot(df['Resolution'], df['Real Time'], color="purple", marker='o', label='Real Time (s)')
+    plt.plot(df['Resolution'], df['CPU Time'], color="gold", marker='s', label='CPU Time (s)')
+    plt.title('RayleighBenard2d: Time vs Resolution')
+    plt.xlabel('Resolution')
+    plt.ylabel('Time (s)')
+    plt.legend()
+    plt.grid(True)
+
+    # Subplot 2: MLUP/s and MLUP/p/s
+    plt.subplot(1, 2, 2)
+    plt.plot(df['Resolution'], df['Avg MLUP/s'], color="purple", marker='^', label='Avg MLUP/s')
+    plt.plot(df['Resolution'], df['Avg MLUP/p/s'], color="gold", marker='x', label='Avg MLUP/p/s')
+    plt.title('RayleighBenard2d: Performance vs Resolution')
+    plt.xlabel('Resolution')
+    plt.ylabel('Performance')
+    plt.legend()
+    plt.grid(True)
+
+    plt.tight_layout()
+    plt.show()
 
 
 def main() -> None:
     """ Create charts and graphs based on CS 470 final project output """
     
-    #Comparison of OpenMP and MPI Average Runtime for RayleighBenard2d
-    compare_omp_mpi_strong_scaling_rayleigh()
+    # Comparison of OpenMP and MPI Average Runtime for RayleighBenard2d
+    # compare_omp_mpi_strong_scaling_rayleigh()
+    
+    # Chart showing the effects of increasing the resolution for RayleighBenard2d
+    increasing_resolution_rayleigh_benard_2d()
 
 if __name__ == "__main__":
     main()
