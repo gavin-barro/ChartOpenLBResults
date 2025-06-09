@@ -90,7 +90,7 @@ def bifurcation3d_omp_weak_vs_strong():
     plt.plot(weak_df['OMP N Threads'], weak_df['Real Time Avg'], marker='s', color='gold', label='Weak Scaling')
 
     # Add annotations on weak scaling points
-    for i, row in weak_df.iterrows():
+    for _, row in weak_df.iterrows():
         plt.annotate(f"Res: {row['Resolution']}",  # text
                     (row['OMP N Threads'], row['Real Time Avg']),  # point (x, y)
                     textcoords="offset points",  # how to position text
@@ -111,10 +111,10 @@ def main() -> None:
     """ Create charts and graphs based on CS 470 final project output """
     
     # Comparison of OpenMP and MPI average runtime for RayleighBenard2d
-    # compare_omp_mpi_strong_scaling_rayleigh_benard_2d()
+    compare_omp_mpi_strong_scaling_rayleigh_benard_2d()
     
     # Chart showing the effects of increasing the resolution for RayleighBenard2d
-    # increasing_resolution_rayleigh_benard_2d()
+    increasing_resolution_rayleigh_benard_2d()
     
     # Chart comparing strong vs weak scaling for Birfurcation3d
     bifurcation3d_omp_weak_vs_strong()
