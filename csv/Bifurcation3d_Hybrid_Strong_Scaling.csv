@@ -1,0 +1,4 @@
+OMP N Threads,MPI Processes,Real Time (1st),Real Time (2nd),CPU Time (1st),CPU Time (2nd),Avg MLUP/s (1st),Avg MLUP/s (2nd),Avg MLUP/p/s (1st),Avg MLUP/p/s (2nd)
+2,2,34.707s,37.389s,39.225s,36.681s,0.236,0.200,0.059,0.050
+4,2,44.152s,34.512s,58.401s,56.179s,0.227,0.188,0.028,0.023
+8,2,34.900s,34.644s,86.323s,85.956s,0.242,0.252,0.015,0.016

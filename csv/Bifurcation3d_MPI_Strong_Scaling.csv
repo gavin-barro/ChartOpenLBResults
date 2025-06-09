@@ -1,0 +1,7 @@
+N Processes,Tasks per Node,Real Time (1st),Real Time (2nd),CPU Time (1st),CPU Time (2nd),Avg MLUP/s (1st),Avg MLUP/s (2nd),Avg MLUP/p/s (1st),Avg MLUP/p/s (2nd)
+1,1,54.682s,56.547s,48.982s,50.862s,0.155,0.147,0.155,0.147
+2,2,35.773s,40.273s,32.555s,32.303s,0.229,0.182,0.114,0.091
+4,2,32.197s,26.908s,29.658s,24.664s,0.263,0.262,0.066,0.066
+8,2,25.936s,23.268s,24.069s,21.407s,0.326,0.358,0.041,0.045
+16,2,Code 7,Code 9,Code 7,Code 9,Code 7,Code 9,Code 7,Code 9
+32,2,Code 7,Code 9,Code 7,Code 9,Code 7,Code 9,Code 7,Code 9
