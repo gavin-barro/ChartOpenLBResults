@@ -1,7 +1,12 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 
-def compare_omp_mpi_strong_scaling_rayleigh() -> None:
+
+def clean_time(col: pd.Series) -> float:
+    """ Helper to clean 'Xs' to float seconds """
+    return col.str.replace('s', '', regex=False).astype(float)
+
+def compare_omp_mpi_strong_scaling_rayleigh_benard_2d() -> None:
     # Load MPI data
     mpi_df = pd.read_csv("csv/RayleighBenard2d_MPI_Strong _Scaling.csv")
     
@@ -61,16 +66,58 @@ def increasing_resolution_rayleigh_benard_2d() -> None:
 
     plt.tight_layout()
     plt.show()
+    
+def bifurcation3d_omp_weak_vs_strong():
+    # Load the CSV files
+    strong_df = pd.read_csv('csv/Bifurcation3d_OpenMP_Strong_Scaling.csv')
+    weak_df = pd.read_csv('csv/Bifurcation3d_OpenMP_Weak_Scaling.csv')
 
+    # Clean 's' and convert time columns to float
+    for col in ['Real Time (1st)', 'Real Time (2nd)', 'CPU Time (1st)', 'CPU Time (2nd)']:
+        strong_df[col] = strong_df[col].str.rstrip('s').astype(float)
+        weak_df[col] = weak_df[col].str.rstrip('s').astype(float)
+
+    # Calculate averages
+    strong_df['Real Time Avg'] = (strong_df['Real Time (1st)'] + strong_df['Real Time (2nd)']) / 2
+    weak_df['Real Time Avg'] = (weak_df['Real Time (1st)'] + weak_df['Real Time (2nd)']) / 2
+
+    plt.figure(figsize=(10,6))
+
+    # Plot strong scaling
+    plt.plot(strong_df['OMP N Threads'], strong_df['Real Time Avg'], marker='o', color='purple', label='Strong Scaling')
+
+    # Plot weak scaling
+    plt.plot(weak_df['OMP N Threads'], weak_df['Real Time Avg'], marker='s', color='gold', label='Weak Scaling')
+
+    # Add annotations on weak scaling points
+    for i, row in weak_df.iterrows():
+        plt.annotate(f"Res: {row['Resolution']}",  # text
+                    (row['OMP N Threads'], row['Real Time Avg']),  # point (x, y)
+                    textcoords="offset points",  # how to position text
+                    xytext=(0,10),  # offset: 10 points vertical above
+                    ha='center',  # horizontal alignment
+                    fontsize=8,
+                    color='black')
+
+    plt.xlabel('OMP N Threads')
+    plt.ylabel('Average Real Time (s)')
+    plt.title('Bifurcation3d Strong vs Weak Scaling with Resolution Annotations')
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+    plt.show()
 
 def main() -> None:
     """ Create charts and graphs based on CS 470 final project output """
     
-    # Comparison of OpenMP and MPI Average Runtime for RayleighBenard2d
-    # compare_omp_mpi_strong_scaling_rayleigh()
+    # Comparison of OpenMP and MPI average runtime for RayleighBenard2d
+    # compare_omp_mpi_strong_scaling_rayleigh_benard_2d()
     
     # Chart showing the effects of increasing the resolution for RayleighBenard2d
-    increasing_resolution_rayleigh_benard_2d()
+    # increasing_resolution_rayleigh_benard_2d()
+    
+    # Chart comparing strong vs weak scaling for Birfurcation3d
+    bifurcation3d_omp_weak_vs_strong()
 
 if __name__ == "__main__":
     main()
