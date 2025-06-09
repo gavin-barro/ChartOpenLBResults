@@ -67,7 +67,7 @@ def increasing_resolution_rayleigh_benard_2d() -> None:
     plt.tight_layout()
     plt.show()
     
-def bifurcation3d_omp_weak_vs_strong():
+def bifurcation3d_omp_weak_vs_strong() -> None:
     # Load the CSV files
     strong_df = pd.read_csv('csv/Bifurcation3d_OpenMP_Strong_Scaling.csv')
     weak_df = pd.read_csv('csv/Bifurcation3d_OpenMP_Weak_Scaling.csv')
@@ -111,7 +111,7 @@ def main() -> None:
     """ Create charts and graphs based on CS 470 final project output """
     
     # Comparison of OpenMP and MPI average runtime for RayleighBenard2d
-    compare_omp_mpi_strong_scaling_rayleigh_benard_2d()
+    compare_omp_mpi_strong_scaling_rayleigh_benard_2d() 
     
     # Chart showing the effects of increasing the resolution for RayleighBenard2d
     increasing_resolution_rayleigh_benard_2d()
